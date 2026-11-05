@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Make one or two A4 handwriting practice pages with a model, tracing and space to practise.">
+    <title>Handwriting worksheet generator</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./lettering.js" defer></script>
+    <script src="./worksheet.js" defer></script>
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <svg class="brand-icon" viewBox="0 0 32 32" aria-hidden="true" fill="none">
+          <path d="M6 23h20M8 18l3-1 11-11 3 3-11 11-6 1 1-5M19 9l3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <h1>Handwriting worksheet generator</h1>
+          <p>Make A4 worksheets with a model, a trace and space to practise.</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <form id="settings" class="settings" autocomplete="off">
+        <h2>Worksheet settings</h2>
+
+        <div class="passage">
+          <label class="control-label" for="passage">Text to practise</label>
+          <textarea id="passage" name="passage" rows="4" spellcheck="false" aria-describedby="passage-space passage-error">The quick brown fox jumps over the lazy dog.</textarea>
+          <div class="field-note" id="passage-space"></div>
+          <p class="error" id="passage-error" aria-live="polite"></p>
+        </div>
+
+        <fieldset class="header-settings">
+          <legend>Name and date</legend>
+          <p class="field-note">Leave a field empty for writing space. Add text to trace and copy.</p>
+          <label class="check"><input type="checkbox" id="include-name" checked> Include a name field</label>
+          <div id="name-settings" class="header-field">
+            <label class="visually-hidden" for="pupil-name">Name to trace</label>
+            <input type="text" id="pupil-name" placeholder="Name to trace (optional)" aria-describedby="name-error">
+            <p class="error" id="name-error" aria-live="polite"></p>
+          </div>
+          <label class="check"><input type="checkbox" id="include-date" checked> Include a date field</label>
+          <div id="date-settings" class="header-field">
+            <label class="visually-hidden" for="date">Date to trace</label>
+            <input type="text" id="date" placeholder="Date to trace (optional)" aria-describedby="date-error">
+            <p class="error" id="date-error" aria-live="polite"></p>
+            <label class="check auto-date"><input type="checkbox" id="today"> Use today’s date (UK)</label>
+          </div>
+        </fieldset>
+
+        <div>
+          <label class="control-label" for="lettering">Handwriting font</label>
+          <select id="lettering" name="lettering">
+            <option value="print">Upright print</option>
+            <option value="slanted">Slanted print</option>
+            <option value="joined">Joined cursive</option>
+          </select>
+        </div>
+
+        <fieldset>
+          <legend>Tracing marks</legend>
+          <div class="choices">
+            <label><input type="radio" name="tracing" value="dotted" checked> Dotted</label>
+            <label><input type="radio" name="tracing" value="dashed"> Dashed</label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>A4 orientation</legend>
+          <div class="choices">
+            <label><input type="radio" name="orientation" value="portrait" checked> Portrait</label>
+            <label><input type="radio" name="orientation" value="landscape"> Landscape</label>
+          </div>
+        </fieldset>
+
+        <div>
+          <label class="check"><input type="checkbox" name="secondPage" aria-describedby="second-page-note"> Add a second practice page</label>
+          <p class="field-note" id="second-page-note">Repeats the model and trace, with room to write the passage twice without guides.</p>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="primary" id="open-preview">Open in new tab <span aria-hidden="true">↗</span></button>
+          <button type="button" id="print">Print / Save PDF</button>
+        </div>
+        <p class="field-note" id="popup-note" role="status" hidden>The browser blocked the new tab. Use Print / Save PDF here.</p>
+      </form>
+
+      <section class="preview" aria-labelledby="preview-title">
+        <div class="preview-heading">
+          <h2 id="preview-title">Live preview</h2>
+          <span id="paper-label" class="paper-label">A4 portrait</span>
+        </div>
+        <div class="paper-frame" id="preview">
+          <p class="empty-preview">Adjust the worksheet settings to see a preview.</p>
+        </div>
+      </section>
+    </main>
+    <div class="print-sheet" aria-hidden="true"></div>
+    <noscript>This worksheet generator needs JavaScript to lay out the practice page.</noscript>
+  </body>
+</html>

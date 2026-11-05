@@ -1,0 +1,102 @@
+:root {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: #1f2927;
+  background: #f2f4f1;
+  line-height: 1.45;
+  --accent: #205b4a;
+  --muted: #4e615b;
+  --border: #c3cec7;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; }
+button, input, textarea, select { font: inherit; }
+h1, h2, p { margin: 0; }
+h1 { font-size: clamp(1.35rem, 2.6vw, 1.95rem); line-height: 1.2; letter-spacing: -.025em; }
+h2 { font-size: 1.12rem; }
+
+.site-header { background: #fff; border-bottom: 1px solid #dce4df; }
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 1280px;
+  padding: 1.35rem clamp(1rem, 4vw, 2.75rem);
+  margin: auto;
+}
+.header-inner p { color: var(--muted); font-size: .92rem; margin-top: .32rem; }
+.brand-icon { flex: 0 0 2.75rem; width: 2.75rem; padding: .32rem; color: #fff; background: var(--accent); border-radius: .6rem; }
+.workspace {
+  max-width: 1280px;
+  margin: auto;
+  padding: 1.6rem clamp(1rem, 4vw, 2.75rem) 2.6rem;
+  display: grid;
+  grid-template-columns: minmax(19rem, 23rem) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1rem, 3vw, 2.75rem);
+}
+.settings {
+  display: grid;
+  gap: 1.15rem;
+  padding: clamp(1rem, 3vw, 1.4rem);
+  border: 1px solid #dce4df;
+  border-radius: .9rem;
+  background: white;
+  box-shadow: 0 2px 5px #24332b09;
+}
+fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+legend, .control-label { font-weight: 650; padding: 0; margin-bottom: .4rem; }
+.control-label { display: block; }
+textarea, input[type="text"], select {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: .4rem;
+  padding: .55rem .65rem;
+  color: inherit;
+  background: #fff;
+}
+textarea { resize: vertical; min-height: 5.4rem; }
+input[readonly] { background: #f0f4f1; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+[aria-invalid="true"] { border-color: #9a3426 !important; }
+.field-note { margin-top: .4rem; font-size: .82rem; color: var(--muted); }
+.error { margin-top: .3rem; font-size: .82rem; color: #9a3426; }
+.error:empty { margin: 0; }
+.choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .45rem; }
+.choices label, .check { display: flex; align-items: center; gap: .4rem; cursor: pointer; font-size: .875rem; }
+.choices label { min-height: 2.55rem; padding: .45rem .55rem; border: 1px solid var(--border); border-radius: .4rem; }
+.choices label:has(:checked) { background: #edf5ef; border-color: #7ba892; }
+input[type="radio"], input[type="checkbox"] { flex: none; width: 1rem; height: 1rem; margin: 0; accent-color: var(--accent); }
+.header-settings .field-note { margin: 0 0 .7rem; }
+.header-settings > .check { min-height: 1.55rem; font-weight: 600; }
+.header-settings > .check ~ .check { margin-top: .5rem; }
+.header-field { padding: .3rem 0 0 1.4rem; }
+.auto-date { margin-top: .4rem; min-height: 1.5rem; }
+.actions { display: flex; flex-wrap: wrap; gap: .5rem; padding-top: .2rem; }
+button {
+  border: 1px solid var(--border);
+  border-radius: .4rem;
+  padding: .55rem .7rem;
+  min-height: 2.65rem;
+  color: inherit;
+  background: white;
+  font-size: .875rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+button:hover { background: #f0f5f1; }
+button.primary { border-color: var(--accent); background: var(--accent); color: white; }
+button.primary:hover { background: #194838; }
+button span { margin-left: .15rem; }
+button:disabled { opacity: .5; cursor: default; }
+.preview-heading { display: flex; align-items: center; justify-content: space-between; gap: .6rem; margin: .15rem 0 .7rem; }
+.paper-label { border: 1px solid #d0ddd4; border-radius: 2rem; padding: .18rem .65rem; background: #e9efea; color: #334e44; font-size: .78rem; }
+.paper-frame { display: grid; place-items: start center; gap: 1rem; background: #e3e9e4; border: 1px solid #d6e0d8; border-radius: .75rem; padding: clamp(.65rem, 2.8vw, 1.6rem); }
+.worksheet { display: block; width: 100%; max-width: 40rem; height: auto; background: white; border: 1px solid #d2dbd5; box-shadow: 0 4px 16px #283b3020; }
+.worksheet[viewBox="0 0 297 210"] { max-width: 54rem; }
+.empty-preview { padding: 2rem .8rem; color: var(--muted); }
+.print-sheet { display: none; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 720px) { .workspace { grid-template-columns: minmax(0, 1fr); } }
