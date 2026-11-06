@@ -45,6 +45,7 @@
     const layout = layoutWorksheet({
       orientation,
       style: form.elements.lettering.value,
+      fontSize: form.elements.fontSize.value,
       text: passage.value,
       name: includeName.checked ? name.value : null,
       date: includeDate.checked ? date.value : null,

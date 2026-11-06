@@ -1,8 +1,8 @@
 # Handwriting Practice
 
 Make printable A4 handwriting worksheets with a model, dotted or dashed tracing,
-and space to practise. Choose portrait or landscape and add a second page if
-you want room to write the passage twice without guides.
+and space to practise. Choose a handwriting font, size and page orientation.
+Add a second page if you want room to write the passage twice without guides.
 
 ## Open locally
 

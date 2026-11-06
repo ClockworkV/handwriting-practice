@@ -15,19 +15,21 @@ const handwritingWorksheet = (() => {
   const minUnruledRowHeight = 10;
   const unruledHeadingHeight = 5;
   const secondPageHeightPerLine = 2 * (secondModelRowHeight + minUnruledRowHeight);
-  const bodyScale = 0.435;
+  const largeBodyScale = 0.435;
   const sectionHeading = 8;
   const titleHeight = 11;
   const headerTop = margin + titleHeight;
   const svgNamespace = "http://www.w3.org/2000/svg";
 
-  function layoutWorksheet({ text, style, orientation, name, date, secondPage }) {
+  function layoutWorksheet({ text, style, fontSize, orientation, name, date, secondPage }) {
     const paper = paperSizes[orientation];
     const width = paper.width - 2 * margin;
+    const sizeScale = fontSize === "small" ? 0.8 : 1;
+    const bodyScale = largeBodyScale * sizeScale;
     const splitFields = name !== null && date !== null;
     const fieldGap = 7;
     const nameWidth = splitFields ? Math.round((width - fieldGap) * 0.39) : width;
-    const fieldScale = splitFields ? 0.41 : 0.43;
+    const fieldScale = (splitFields ? 0.41 : 0.43) * sizeScale;
     const maxFieldRows = splitFields && orientation === "portrait" ? 2 : 1;
     const fields = [];
     const errors = {};
@@ -79,7 +81,7 @@ const handwritingWorksheet = (() => {
         ruledRows: Math.max(0, Math.floor((writingHeight - unruledHeight) / rowHeight)),
       });
     }
-    return { paper, width, style, text: text.trim(), lines, maxLines, errors, pages };
+    return { paper, width, style, bodyScale, text: text.trim(), lines, maxLines, errors, pages };
   }
 
   function element(parent, name, attributes = {}, text) {
@@ -104,7 +106,7 @@ const handwritingWorksheet = (() => {
     });
   }
 
-  function practiceRow(parent, x, y, width, style, line, traceDash, scale = bodyScale, guides = true) {
+  function practiceRow(parent, x, y, width, style, line, traceDash, scale, guides = true) {
     const row = element(parent, "g", { "data-row": traceDash ? "trace" : line ? "model" : "blank" });
     const baseline = y + 9.7;
     if (guides) {
@@ -125,7 +127,7 @@ const handwritingWorksheet = (() => {
   }
 
   function renderPage(document, layout, page, traceDash, pageNumber) {
-    const { paper, width, style, text, lines, pages } = layout;
+    const { paper, width, style, bodyScale, text, lines, pages } = layout;
     const { fields, ruledRows, showUnruled, modelRowHeight } = page;
     const svg = document.createElementNS(svgNamespace, "svg");
     svg.setAttribute("viewBox", `0 0 ${paper.width} ${paper.height}`);
@@ -159,7 +161,7 @@ const handwritingWorksheet = (() => {
       const practice = key === "practise";
       const rows = practice ? Array(ruledRows).fill(null) : lines;
       for (const row of rows) {
-        practiceRow(section, margin, y, width, style, row, key === "trace" ? traceDash : null);
+        practiceRow(section, margin, y, width, style, row, key === "trace" ? traceDash : null, bodyScale);
         y += practice ? rowHeight : modelRowHeight;
       }
     }
